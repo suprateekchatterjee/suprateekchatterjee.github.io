@@ -20,31 +20,7 @@ MathJax.Hub.Config({
 </script>
 <!-- End MathJax -->	
 	
-<script type="text/javascript">
-function showAbstract(e){
-   f = e;
-   var div;
-   for(div = e.nextSibling; div.className != "abs"; div = div.nextSibling);
-   if (div.style.display=="block"){
-     div.style.display="";
-   } else {
-     div.style.display="block";
-   }
-   return true;
-}
-</script>
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
-                "HTML-CSS": {
-                    availableFonts: ["Asana-Math"],
-                    preferredFont: "Asana-Math"
-                }
-});
-</script>
-
-	<body>
+<body>
 <table summary="Table for page layout." id="tlayout">
 <tr valign="top">
 <td id="layout-menu">
@@ -56,47 +32,6 @@ MathJax.Hub.Config({
 <!-- <div class="menu-item"><a href="cv.pdf">CV</a></div> -->
 </td>
 	
-<td id="layout-content">
-<div id="toptitle">
-<h1>Contact</h1>
-</div>
-<style>
-	#map_canvas {
-		width: 500px;
-        height: 400px;
-	}
-</style>
-
-<script src="https://maps.googleapis.com/maps/api/js">
-</script>
-<script>
-    function initialize() {
-        var mapCanvas = document.getElementById('map_canvas');
-        var mapOptions = {
-			center: new google.maps.LatLng(25.4303619,81.7720828),
-			zoom: 17,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        var map = new google.maps.Map(mapCanvas, mapOptions);
-        var marker = new google.maps.Marker({
-			position: new google.maps.LatLng(25.4303619,81.7720828),
-            map: map,
-            title: 'HPC Lab, CC2-Building IIIT-Allahabad'
-        });
-        var infowindow = new google.maps.InfoWindow({
-			content: 'HPC Lab, CC2-Building, IIIT-Allahabad'
-        });
-        infowindow.open(marker.get('map'), marker);
-    }
-	google.maps.event.addDomListener(window, 'load', initialize);
-</script>
-
-<div style="width: 100%; overflow: hidden;">
-
-<div style="width: 500px; height: 520px; float: left;" id="map_canvas"></div>
-
-<div style="margin-left: 520px;">
-
 <dl>
 <p> 
 HPC Laboratory<br />
@@ -112,10 +47,6 @@ Email: RS171 ατ iiita δοτ ac δοτ in <br />
 <p> suprateek δοτ  chatterjea ατ gmail δοτ com <br /> </p>
 </dl>
 	
-</div>
-
-</div>
-
 <div id="footer">
 <div id="footer-text">Page generated on 22-08-2014 at 23:59:59 IST. </div>
 </div>
