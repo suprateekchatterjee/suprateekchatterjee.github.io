@@ -43,50 +43,7 @@ MathJax.Hub.Config({
 	}
 </style>
 
-<!-----------------
-
-  <script src="https://maps.googleapis.com/maps/api/js">
-
--------------------->    
-
-<!------------
-
-<script src="https://maps.googleapis.com/maps/api/js?key= 
-AIzaSyCq7IJU5iYuJUEBFXFvb4iNtxciQR-rZMc&callback=initMap">
-</script>
-
-<script>
-    function initialize() {
-        var mapCanvas = document.getElementById('map_canvas');
-        var mapOptions = {
-			center: new google.maps.LatLng(25.4303619,81.7720828),
-			zoom: 17,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        var map = new google.maps.Map(mapCanvas, mapOptions);
-        var marker = new google.maps.Marker({
-			position: new google.maps.LatLng(25.4303619,81.7720828),
-            map: map,
-            title: 'HPC Lab, CC2-Building IIIT-Allahabad'
-        });
-        var infowindow = new google.maps.InfoWindow({
-			content: 'HPC Lab, CC2-Building, IIIT-Allahabad'
-        });
-        infowindow.open(marker.get('map'), marker);
-    }
-	google.maps.event.addDomListener(window, 'load', initialize);
-</script>
-
-<div style="width: 100%; overflow: hidden;">
-
-<div style="width: 450px; height: 300px; float: left;" id="map_canvas"></div>
-
-<div style="margin-left: 520px;">
-
-
--------------->
-
-<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d1801.6256002985695!2d81.7699488!3d25.429864!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1562299306037!5m2!1sen!2sin" width="500" height="520" frameborder="0" style="border:0" allowfullscreen>
+<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d1801.6256002985695!2d81.7699488!3d25.429864!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1562299306037!5m2!1sen!2sin" width="450" height="300" frameborder="0" style="border:0" allowfullscreen>
 </iframe>
 
 
