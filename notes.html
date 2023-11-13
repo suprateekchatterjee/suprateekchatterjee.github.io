@@ -927,36 +927,7 @@ MathJax.Hub.Config({
 </p><p>In the second phase of the algorithm, it groups all of the nodes in the same community and builds a new network where nodes are the communities from the previous phase. Any links between nodes of the same community are now represented by self-loops on the new community node and links from multiple nodes in the same community to a node in a different community are represented by weighted edges between communities. Once the new network is created, the second phase has ended and the first phase can be re-applied to the new network.
 </p>
 	
-<h2>Greedy Algorithm</h2>
-<p>We will now prove that Greedy Algorithm can perform arbitrarily worse. Consider the following example:</p>
-<table id="greedy">
-<tr class="r1"><td class="c1">Experts </td><td class="c2"> <img class="eq" src="eqs/6272018864-130.png" alt="1" style="vertical-align: -0px" /> </td><td class="c3"> <img class="eq" src="eqs/6400019251-130.png" alt="2" style="vertical-align: -0px" /> </td><td class="c4"> <img class="eq" src="eqs/6528019634-130.png" alt="3" style="vertical-align: -1px" /> </td><td class="c5"> <img class="eq" src="eqs/1673000118047957221-130.png" alt="cdots" style="vertical-align: --3px" /> </td><td class="c6"> <img class="eq" src="eqs/9984030031-130.png" alt="N" style="vertical-align: -0px" /></td></tr>
-<tr class="r2"><td class="c1"><img class="eq" src="eqs/1495230934591648943-130.png" alt="t=1" style="vertical-align: -1px" /> </td><td class="c2"> <img class="eq" src="eqs/6272018864-130.png" alt="1" style="vertical-align: -0px" /> </td><td class="c3"> <img class="eq" src="eqs/5760034605052020-130.png" alt="-1" style="vertical-align: -0px" /> </td><td class="c4"> <img class="eq" src="eqs/5760034605052020-130.png" alt="-1" style="vertical-align: -0px" /> </td><td class="c5"> <img class="eq" src="eqs/1673000118047957221-130.png" alt="cdots" style="vertical-align: --3px" /> </td><td class="c6"> <img class="eq" src="eqs/5760034605052020-130.png" alt="-1" style="vertical-align: -0px" /></td></tr>
-<tr class="r3"><td class="c1"><img class="eq" src="eqs/1495230934591648942-130.png" alt="t=2" style="vertical-align: -1px" /> </td><td class="c2"> <img class="eq" src="eqs/6272018864-130.png" alt="1" style="vertical-align: -0px" /> </td><td class="c3"> <img class="eq" src="eqs/6272018864-130.png" alt="1" style="vertical-align: -0px" /> </td><td class="c4"> <img class="eq" src="eqs/5760034605052020-130.png" alt="-1" style="vertical-align: -0px" /> </td><td class="c5"> <img class="eq" src="eqs/1673000118047957221-130.png" alt="cdots" style="vertical-align: --3px" /> </td><td class="c6"> <img class="eq" src="eqs/5760034605052020-130.png" alt="-1" style="vertical-align: -0px" /></td></tr>
-<tr class="r4"><td class="c1"><img class="eq" src="eqs/1495230934591648941-130.png" alt="t=3" style="vertical-align: -1px" /> </td><td class="c2"> <img class="eq" src="eqs/6272018864-130.png" alt="1" style="vertical-align: -0px" /> </td><td class="c3"> <img class="eq" src="eqs/6272018864-130.png" alt="1" style="vertical-align: -0px" /> </td><td class="c4"> <img class="eq" src="eqs/6272018864-130.png" alt="1" style="vertical-align: -0px" /> </td><td class="c5"> <img class="eq" src="eqs/1673000118047957221-130.png" alt="cdots" style="vertical-align: --3px" /> </td><td class="c6"> <img class="eq" src="eqs/5760034605052020-130.png" alt="-1" style="vertical-align: -0px" /></td></tr>
-<tr class="r5"><td class="c1"></td><td class="c2"> </td><td class="c3"> </td><td class="c4"> </td><td class="c5"> <img class="eq" src="eqs/2740588985023950808-130.png" alt="vdots" style="vertical-align: -9px" /> </td><td class="c6"> </td></tr>
-<tr class="r6"><td class="c1"><img class="eq" src="eqs/1495230934591648978-130.png" alt="t=N" style="vertical-align: -1px" /> </td><td class="c2"> <img class="eq" src="eqs/6272018864-130.png" alt="1" style="vertical-align: -0px" /> </td><td class="c3"> <img class="eq" src="eqs/6272018864-130.png" alt="1" style="vertical-align: -0px" /> </td><td class="c4"> <img class="eq" src="eqs/6272018864-130.png" alt="1" style="vertical-align: -0px" /> </td><td class="c5"> <img class="eq" src="eqs/1673000118047957221-130.png" alt="cdots" style="vertical-align: --3px" /> </td><td class="c6"> <img class="eq" src="eqs/6272018864-130.png" alt="1" style="vertical-align: -0px" />
-</td></tr></table>
-<p><i>wlog</i> assume greedy algorithm picks the expert in following manner: Expert <img class="eq" src="eqs/6272018864-130.png" alt="1" style="vertical-align: -0px" />, Expert <img class="eq" src="eqs/6400019251-130.png" alt="2" style="vertical-align: -0px" /> and so on. Clearly, this strategy accumulates a huge loss. The best strategy is to pick Expert <img class="eq" src="eqs/9984030031-130.png" alt="N" style="vertical-align: -0px" /> at each stage.</p>
-
-	
-<h2>MMW Algorithm</h2>
-<p>We will now describe the overall idea of MMW Algorithm:</p>
-<ol>
-<li><p>Maintain weights <img class="eq" src="eqs/1574566591054212769-130.png" alt="w_i^{(t)} &gt; 0" style="vertical-align: -7px" />.</p>
-</li>
-<li><p>Output distribution <img class="eq" src="eqs/67599404260009933-130.png" alt="(p_1^{(t)},p_2^{(t)},dots,p_N^{(t)})" style="vertical-align: -6px" /> at every step. Note that <img class="eq" src="eqs/1232329199524861116-130.png" alt="p_i^{(t)} propto w_i^{(t)}" style="vertical-align: -7px" />.</p>
-</li>
-<li><p>Loss at time <img class="eq" src="eqs/649959524806334037-130.png" alt="t = sum_i p_i^{(t)} cdot l_i^{(t)} = mathbf{p}_i^{(t)} cdot mathbf{l}_i^{(t)}" style="vertical-align: -8px" />.</p>
-</li>
-</ol>
-<p>The only remaining question is how to define <img class="eq" src="eqs/1675606664013715899-130.png" alt="w_i^{(t)}" style="vertical-align: -7px" /> and update them. There can be various possible approaches but the one we are going to use is based on Hedge Algorithm.</p>
-<h2>Hedge Algorithm</h2>
-
-<div class="eqwl"><img class="eqwl" src="eqs/8781401779996243750-130.png" alt="     w_i^{(t)} = 1 textup{~~} forall i " />
-<br /></div>
-<div class="eqwl"><img class="eqwl" src="eqs/1179949253465788615-130.png" alt="     w_i^{(t+1)} = w_i^{(t)} e^{epsilon l_i^{(t)}} textup{~~} l_i^{(t)} in {-1,1} " />
-<br /></div><h3>Analysis</h3>
+<h3>Analysis</h3>
 <p>For the analysis of this function, we will define a potential function and compare the upper and lower bounds of loss.<br />
 The potential function is defined as:</p>
 
