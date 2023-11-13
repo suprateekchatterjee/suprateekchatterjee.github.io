@@ -941,54 +941,6 @@ MathJax.Hub.Config({
 </p>
 	
 <h3>Analysis</h3>
-<p>For the analysis of this function, we will define a potential function and compare the upper and lower bounds of loss.<br />
-The potential function is defined as:</p>
-
-<div class="eqwl"><img class="eqwl" src="eqs/3468654295305116085-130.png" alt=" 	Phi^{(t)} = sum_{i=1}^N w_i^{(t)} " />
-<br /></div><h4>Lower bound</h4>
-<div class="infoblock">
-<div class="blockcontent">
-
-<div class="eqwl"><img class="eqwl" src="eqs/3939420132795755024-130.png" alt=" 	Phi^{(T+1)} ge exp(-epsilon sum_{t=1}^T l_i^{(t)}) textup{~~} forall i " />
-<br /></div></div></div>
-<p>The above inequality follows from the fact that right hand quantity is <img class="eq" src="eqs/7664307535635129731-130.png" alt="w_i^{(t+1)}" style="vertical-align: -7px" /> and each of the <img class="eq" src="eqs/1675606664013715899-130.png" alt="w_i^{(t)}" style="vertical-align: -7px" />'s is positive.</p>
-<h4>Upper bound</h4>
-<p>For the upper bound, we will be needing the following inequalities:</p>
-
-<div class="eqwl"><img class="eqwl" src="eqs/9026121068214611891-130.png" alt=" 	forall x: textup{~} |x| le 1, textup{~~} e^x le 1+x+x^2 " />
-<br /></div>
-<div class="eqwl"><img class="eqwl" src="eqs/6785913213007262680-130.png" alt=" 	forall x, textup{~~} 1+x le e^x " />
-<br /></div>
-<div class="eqwl"><img class="eqwl" src="eqs/4705090790030894908-130.png" alt=" Phi^{(T+1)} = sum_{i=1}^N w_i^{(T+1)} = sum_{i=1}^N w_i^{(T)} exp(-epsilon l_i^{(T)}) le sum_{i=1}^N w_i^{(T)} (1-epsilon l_i^{(T)}+epsilon^2) = sum_{i=1}^N w_i^{(T)} (1+epsilon^2) - epsilon sum_{i=1}^N w_i^{(T)} cdot l_i^{(T)} " />
-<br /></div><p>The second last line follows from using the above mentioned inequality and also the fact that <img class="eq" src="eqs/3334511128525036101-130.png" alt="l_i^{(T)} in {-1,1}" style="vertical-align: -7px" />. Using the fact that <img class="eq" src="eqs/6670845215313368603-130.png" alt="p_i^{(T)}=frac{w_i^{(T)}}{sum_i w_i^{(T)}}" style="vertical-align: -23px" />, we can write <img class="eq" src="eqs/5707209321324662114-130.png" alt="Phi^{(T+1)}" style="vertical-align: -0px" /> as</p>
-
-<div class="eqwl"><img class="eqwl" src="eqs/8421395408512700172-130.png" alt=" Phi^{(T+1)} = (1+epsilon^2) Phi^{(T)} - epsilon (mathbf{p}^{(T)} cdot mathbf{l}^{(T)}) Phi^{(T)} = Phi^{(T)} (1 + epsilon^2 - epsilon mathbf{p}^{(T)} cdot mathbf{l}^{(T)}) le Phi^{(T)} exp (epsilon^2 - epsilon mathbf{p}^{(T)} cdot mathbf{l}^{(T)}) " />
-<br /></div><p>Unfolding the <img class="eq" src="eqs/1313148741296821265-130.png" alt="Phi^{T}" style="vertical-align: -0px" />, we obtain that</p>
-<div class="infoblock">
-<div class="blockcontent">
-
-<div class="eqwl"><img class="eqwl" src="eqs/776960776375184132-130.png" alt=" Phi^{(T+1)} le N exp (epsilon^2 T - epsilon  sum_{t=1}^Tmathbf{p}^{(T)} cdot mathbf{l}^{(T)}) " />
-<br /></div></div></div>
-<p>Using the two bounds obtained and taking <img class="eq" src="eqs/5161625540728415562-130.png" alt="log" style="vertical-align: -4px" /> of both sides, we obtain,</p>
-<div class="infoblock">
-<div class="blockcontent">
-
-<div class="eqwl"><img class="eqwl" src="eqs/2924223760158830576-130.png" alt=" forall i textup{~~} sum_{t=1}^T mathbf{p}^{(t)} cdot mathbf{l}^{(t)} le sum_{t=1}^T l_i^{(t)} + frac{ln N}{epsilon} + epsilon T " />
-<br /></div></div></div>
-<p>The above inequality states that the loss incurred by our algorithm is worse off than the lost incurred by any expert (in particular, the best expert) by an additive factor which is independent of the expert's losses and depends only on the number of experts and rounds.<br />
-<br />
-To view the above loss per round, divide the whole equation by <img class="eq" src="eqs/10752032341-130.png" alt="T" style="vertical-align: -0px" />.</p>
-<div class="infoblock">
-<div class="blockcontent">
-
-<div class="eqwl"><img class="eqwl" src="eqs/6970803024627108614-130.png" alt=" forall i textup{~~} frac{1}{T} sum_{t=1}^T mathbf{p}^{(t)} cdot mathbf{l}^{(t)} le frac{1}{T} sum_{t=1}^T l_i^{(t)} + frac{ln N}{T epsilon} + epsilon " />
-<br /></div></div></div>
-<p>Hence, as the number of rounds (<img class="eq" src="eqs/10752032341-130.png" alt="T" style="vertical-align: -0px" />) increases, the algorithm performs better and the error drops. In fact, it can be shown that for <img class="eq" src="eqs/3084300815069012524-130.png" alt="T ge frac{4 rho^2 ln n}{eta^2}" style="vertical-align: -11px" />,</p>
-<div class="infoblock">
-<div class="blockcontent">
-
-<div class="eqwl"><img class="eqwl" src="eqs/447563752154312336-130.png" alt=" forall i textup{~~} frac{1}{T} sum_{t=1}^T mathbf{p}^{(t)} cdot mathbf{l}^{(t)} le frac{1}{T} sum_{t=1}^T l_i^{(t)} + eta " />
-<br /></div></div></div>
 
 <h3>References</h3>
 <p>A few exercises which can be tried out to fully internalize the concept:</p>
