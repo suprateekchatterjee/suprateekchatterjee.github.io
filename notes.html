@@ -37,7 +37,6 @@ MathJax.Hub.Config({
 <h1>Notes</h1>
 </div>
 
-
 <h2>Problem Statement</h2>
 <p>Finding communities within an arbitrary network can be a computationally difficult task. The number of communities, if any, within the network is typically unknown and the communities are often of unequal size and/or density. Despite these difficulties, however, several methods for community detection have been developed and employed with varying levels of success. The Louvain method for community detection is a method to extract non-overlapping communities from large networks. The method is a greedy optimization method that appears to run in time <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle O(n\cdot \log n)}">
   <semantics>
@@ -67,6 +66,439 @@ MathJax.Hub.Config({
 </math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" class="mwe-math-fallback-image-inline mw-invert" aria-hidden="true" style="vertical-align: -0.338ex; width:1.395ex; height:1.676ex;" alt="n"></span> is the number of nodes in the network.
 </p>
 	
+<h2>Modularity based </h2>
+<p>Hence, the difference between the actual number of edges between node <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle v}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>v</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle v}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e07b00e7fc0847fbd16391c778d65bc25c452597" class="mwe-math-fallback-image-inline mw-invert" aria-hidden="true" style="vertical-align: -0.338ex; width:1.128ex; height:1.676ex;" alt="v"></span> and <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle w}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>w</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle w}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/88b1e0c8e1be5ebe69d18a8010676fa42d7961e6" class="mwe-math-fallback-image-inline mw-invert" aria-hidden="true" style="vertical-align: -0.338ex; width:1.664ex; height:1.676ex;" alt="w"></span> and the expected number of edges between them is
+</p><p><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle A_{vw}-{\frac {k_{v}k_{w}}{2m}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>A</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>v</mi>
+            <mi>w</mi>
+          </mrow>
+        </msub>
+        <mo>&#x2212;<!-- − --></mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <mrow>
+              <msub>
+                <mi>k</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>v</mi>
+                </mrow>
+              </msub>
+              <msub>
+                <mi>k</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>w</mi>
+                </mrow>
+              </msub>
+            </mrow>
+            <mrow>
+              <mn>2</mn>
+              <mi>m</mi>
+            </mrow>
+          </mfrac>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle A_{vw}-{\frac {k_{v}k_{w}}{2m}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/714966b5af9c40432b96b365e9575c24e915f7c7" class="mwe-math-fallback-image-inline mw-invert" aria-hidden="true" style="vertical-align: -1.838ex; width:12.487ex; height:5.343ex;" alt="{\displaystyle A_{vw}-{\frac {k_{v}k_{w}}{2m}}}"></span>
+</p><p>Summing over all node pairs gives the equation for modularity, <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle Q}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>Q</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle Q}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/8752c7023b4b3286800fe3238271bbca681219ed" class="mwe-math-fallback-image-inline mw-invert" aria-hidden="true" style="vertical-align: -0.671ex; width:1.838ex; height:2.509ex;" alt="Q"></span>.<sup id="cite_ref-npnas_1-2" class="reference"><a href="#cite_note-npnas-1">&#91;1&#93;</a></sup>
+</p>
+<dl><dd>
+<table role="presentation" style="border-collapse:collapse; margin:0; border:none;">
+<tbody><tr>
+<td style="vertical-align:middle; border:none; padding:0.08em;" class="nowrap"><div style="margin:0;"><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle Q={\frac {1}{2m}}\sum _{vw}\left[A_{vw}-{\frac {k_{v}k_{w}}{2m}}\right]{\frac {s_{v}s_{w}+1}{2}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>Q</mi>
+        <mo>=</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <mn>1</mn>
+            <mrow>
+              <mn>2</mn>
+              <mi>m</mi>
+            </mrow>
+          </mfrac>
+        </mrow>
+        <munder>
+          <mo>&#x2211;<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>v</mi>
+            <mi>w</mi>
+          </mrow>
+        </munder>
+        <mrow>
+          <mo>[</mo>
+          <mrow>
+            <msub>
+              <mi>A</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>v</mi>
+                <mi>w</mi>
+              </mrow>
+            </msub>
+            <mo>&#x2212;<!-- − --></mo>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mfrac>
+                <mrow>
+                  <msub>
+                    <mi>k</mi>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mi>v</mi>
+                    </mrow>
+                  </msub>
+                  <msub>
+                    <mi>k</mi>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mi>w</mi>
+                    </mrow>
+                  </msub>
+                </mrow>
+                <mrow>
+                  <mn>2</mn>
+                  <mi>m</mi>
+                </mrow>
+              </mfrac>
+            </mrow>
+          </mrow>
+          <mo>]</mo>
+        </mrow>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <mrow>
+              <msub>
+                <mi>s</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>v</mi>
+                </mrow>
+              </msub>
+              <msub>
+                <mi>s</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>w</mi>
+                </mrow>
+              </msub>
+              <mo>+</mo>
+              <mn>1</mn>
+            </mrow>
+            <mn>2</mn>
+          </mfrac>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle Q={\frac {1}{2m}}\sum _{vw}\left[A_{vw}-{\frac {k_{v}k_{w}}{2m}}\right]{\frac {s_{v}s_{w}+1}{2}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/8e096ae354b71e8f393f412cf84b856d5efa84c3" class="mwe-math-fallback-image-inline mw-invert" aria-hidden="true" style="vertical-align: -3.005ex; width:37.893ex; height:6.676ex;" alt="{\displaystyle Q={\frac {1}{2m}}\sum _{vw}\left[A_{vw}-{\frac {k_{v}k_{w}}{2m}}\right]{\frac {s_{v}s_{w}+1}{2}}}"></span></div>
+</td>
+<td style="vertical-align:middle; width:99%; border:none; padding:0.08em;">
+<div style="margin:0;">
+<table role="presentation" style="border-collapse:collapse; margin:0; border:none; width:99%;">
+<tbody><tr>
+<td style="border:none; padding:0.08em;" rowspan="2"><p style="margin:0; font-size:4pt;">&#160;</p>
+</td>
+<td style="width:100%; border:none; padding:0.08em;"><p style="margin:0; font-size:1pt;">&#160;</p>
+</td>
+<td style="border:none; padding:0.08em;" rowspan="2"><p style="margin:0; font-size:4pt;">&#160;</p>
+</td></tr>
+<tr>
+<td style="border-left:none; border-top:0px none #e5e5e5; border-right:none; border-bottom:none; padding:0.08em;">
+<p style="margin:0; font-size:1pt;">&#160;</p>
+</td></tr></tbody></table>
+</div>
+</td>
+<td style="vertical-align:middle; border:none; padding:0.08em;" class="nowrap"><p style="margin:0pt;"><b>(<span id="math_3" class="reference nourlexpansion" style="font-weight:bold;">3</span>)</b></p>
+</td></tr></tbody></table></dd></dl>
+<p>It is important to note that <b><a href="#math_3">Eq. 3</a></b> holds good for partitioning into two communities only. Hierarchical partitioning (i.e. partitioning into two communities, then the two sub-communities further partitioned into two smaller sub communities only to maximize <i>Q</i>) is a possible approach to identify multiple communities in a network. Additionally, (3) can be generalized for partitioning a network into <i>c</i> communities.<sup id="cite_ref-community_6-0" class="reference"><a href="#cite_note-community-6">&#91;6&#93;</a></sup>
+</p>
+<dl><dd>
+<table role="presentation" style="border-collapse:collapse; margin:0; border:none;">
+<tbody><tr>
+<td style="vertical-align:middle; border:none; padding:0.08em;" class="nowrap"><div style="margin:0;"><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle Q={\frac {1}{(2m)}}\sum _{vw}\left[A_{vw}-{\frac {k_{v}k_{w}}{(2m)}}\right]\delta (c_{v},c_{w})=\sum _{i=1}^{c}(e_{ii}-a_{i}^{2})}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>Q</mi>
+        <mo>=</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <mn>1</mn>
+            <mrow>
+              <mo stretchy="false">(</mo>
+              <mn>2</mn>
+              <mi>m</mi>
+              <mo stretchy="false">)</mo>
+            </mrow>
+          </mfrac>
+        </mrow>
+        <munder>
+          <mo>&#x2211;<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>v</mi>
+            <mi>w</mi>
+          </mrow>
+        </munder>
+        <mrow>
+          <mo>[</mo>
+          <mrow>
+            <msub>
+              <mi>A</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>v</mi>
+                <mi>w</mi>
+              </mrow>
+            </msub>
+            <mo>&#x2212;<!-- − --></mo>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mfrac>
+                <mrow>
+                  <msub>
+                    <mi>k</mi>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mi>v</mi>
+                    </mrow>
+                  </msub>
+                  <msub>
+                    <mi>k</mi>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mi>w</mi>
+                    </mrow>
+                  </msub>
+                </mrow>
+                <mrow>
+                  <mo stretchy="false">(</mo>
+                  <mn>2</mn>
+                  <mi>m</mi>
+                  <mo stretchy="false">)</mo>
+                </mrow>
+              </mfrac>
+            </mrow>
+          </mrow>
+          <mo>]</mo>
+        </mrow>
+        <mi>&#x03B4;<!-- δ --></mi>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>c</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>v</mi>
+          </mrow>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>c</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>w</mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">)</mo>
+        <mo>=</mo>
+        <munderover>
+          <mo>&#x2211;<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>=</mo>
+            <mn>1</mn>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>c</mi>
+          </mrow>
+        </munderover>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>e</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo>&#x2212;<!-- − --></mo>
+        <msubsup>
+          <mi>a</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>2</mn>
+          </mrow>
+        </msubsup>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle Q={\frac {1}{(2m)}}\sum _{vw}\left[A_{vw}-{\frac {k_{v}k_{w}}{(2m)}}\right]\delta (c_{v},c_{w})=\sum _{i=1}^{c}(e_{ii}-a_{i}^{2})}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/1355207520385cde997b9e4f49ee8a1b9ce96061" class="mwe-math-fallback-image-inline mw-invert" aria-hidden="true" style="vertical-align: -3.005ex; width:54.576ex; height:6.843ex;" alt="{\displaystyle Q={\frac {1}{(2m)}}\sum _{vw}\left[A_{vw}-{\frac {k_{v}k_{w}}{(2m)}}\right]\delta (c_{v},c_{w})=\sum _{i=1}^{c}(e_{ii}-a_{i}^{2})}"></span></div>
+</td>
+<td style="vertical-align:middle; width:99%; border:none; padding:0.08em;">
+<div style="margin:0;">
+<table role="presentation" style="border-collapse:collapse; margin:0; border:none; width:99%;">
+<tbody><tr>
+<td style="border:none; padding:0.08em;" rowspan="2"><p style="margin:0; font-size:4pt;">&#160;</p>
+</td>
+<td style="width:100%; border:none; padding:0.08em;"><p style="margin:0; font-size:1pt;">&#160;</p>
+</td>
+<td style="border:none; padding:0.08em;" rowspan="2"><p style="margin:0; font-size:4pt;">&#160;</p>
+</td></tr>
+<tr>
+<td style="border-left:none; border-top:0px none #e5e5e5; border-right:none; border-bottom:none; padding:0.08em;">
+<p style="margin:0; font-size:1pt;">&#160;</p>
+</td></tr></tbody></table>
+</div>
+</td>
+<td style="vertical-align:middle; border:none; padding:0.08em;" class="nowrap"><p style="margin:0pt;"><b>(<span id="math_4" class="reference nourlexpansion" style="font-weight:bold;">4</span>)</b></p>
+</td></tr></tbody></table></dd></dl>
+<p>where <i>e</i><sub><i>ij</i></sub> is the fraction of edges with one end vertices in community <i>i</i> and the other in community <i>j</i>:
+</p>
+<dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle e_{ij}=\sum _{vw}{\frac {A_{vw}}{2m}}1_{v\in c_{i}}1_{w\in c_{j}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>e</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mi>j</mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <munder>
+          <mo>&#x2211;<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>v</mi>
+            <mi>w</mi>
+          </mrow>
+        </munder>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <msub>
+              <mi>A</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>v</mi>
+                <mi>w</mi>
+              </mrow>
+            </msub>
+            <mrow>
+              <mn>2</mn>
+              <mi>m</mi>
+            </mrow>
+          </mfrac>
+        </mrow>
+        <msub>
+          <mn>1</mn>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>v</mi>
+            <mo>&#x2208;<!-- ∈ --></mo>
+            <msub>
+              <mi>c</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>i</mi>
+              </mrow>
+            </msub>
+          </mrow>
+        </msub>
+        <msub>
+          <mn>1</mn>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>w</mi>
+            <mo>&#x2208;<!-- ∈ --></mo>
+            <msub>
+              <mi>c</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>j</mi>
+              </mrow>
+            </msub>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle e_{ij}=\sum _{vw}{\frac {A_{vw}}{2m}}1_{v\in c_{i}}1_{w\in c_{j}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0567c485cdc51fcbecf94e0d64c7e89ecf2a6498" class="mwe-math-fallback-image-inline mw-invert" aria-hidden="true" style="vertical-align: -3.005ex; width:23.906ex; height:6.509ex;" alt="e_{{ij}}=\sum _{{vw}}{\frac  {A_{{vw}}}{2m}}1_{{v\in c_{i}}}1_{{w\in c_{j}}}"></span></dd></dl>
+<p>and <i>a</i><sub><i>i</i></sub> is the fraction of ends of edges that are attached to vertices in community <i>i</i>:
+</p>
+<dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle a_{i}={\frac {k_{i}}{2m}}=\sum _{j}e_{ij}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>a</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <msub>
+              <mi>k</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>i</mi>
+              </mrow>
+            </msub>
+            <mrow>
+              <mn>2</mn>
+              <mi>m</mi>
+            </mrow>
+          </mfrac>
+        </mrow>
+        <mo>=</mo>
+        <munder>
+          <mo>&#x2211;<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>j</mi>
+          </mrow>
+        </munder>
+        <msub>
+          <mi>e</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mi>j</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle a_{i}={\frac {k_{i}}{2m}}=\sum _{j}e_{ij}}</annotation>
+  </semantics>
+</math>
+</span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e2a13da0e7049effd022242d91217c7cf6b16558" class="mwe-math-fallback-image-inline mw-invert" aria-hidden="true" style="vertical-align: -3.338ex; width:18.568ex; height:6.843ex;" alt="a_{i}={\frac  {k_{i}}{2m}}=\sum _{{j}}e_{{ij}}">
+</span></dd>
+</dl>
+
+	
+<p> Modularity is a measure of the structure of networks or graphs which measures the strength of division of a network into modules (also called groups, clusters or communities). Networks with high modularity have dense connections between the nodes within modules but sparse connections between nodes in different modules. Modularity is often used in optimization methods for detecting community structure in networks. Biological networks, including animal brains, exhibit a high degree of modularity. However, modularity maximization is not statistically consistent, and finds communities in its own null model, i.e. fully random graphs, and therefore it cannot be used to find statistically significant community structures in empirical networks. Furthermore, it has been shown that modularity suffers a resolution limit and, therefore, it is unable to detect small communities.</p>	
 <h2>Example</h2>
 <p>When comparing modularity optimization methods, the two measures of importance are the speed and the resulting modularity value. A higher speed is better as it shows a method is more efficient than others and a higher modularity value is desirable as it points to having better-defined communities. The compared methods are the algorithm of Clauset, Newman, and Moore, Pons and Latapy, and Wakita and Tsurumi.</p>
 
