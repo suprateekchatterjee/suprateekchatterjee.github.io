@@ -43,12 +43,94 @@ MathJax.Hub.Config({
 
 <h2>Example</h2>
 <p>As an example, let <img class="eq" src="eqs/4612179489516983986-130.png" alt="l_i^{(t)}" style="vertical-align: -7px" /> denote the loss associated with expert <img class="eq" src="eqs/13440040424-130.png" alt="i" style="vertical-align: -1px" /> at time <img class="eq" src="eqs/14848044661-130.png" alt="t" style="vertical-align: -1px" />.  We can have the following possible scenario:</p>
-<table id="eg">
-<tr class="r1"><td class="c1">Experts </td><td class="c2"> <img class="eq" src="eqs/6272018864-130.png" alt="1" style="vertical-align: -0px" />  </td><td class="c3"> <img class="eq" src="eqs/6400019251-130.png" alt="2" style="vertical-align: -0px" /> </td><td class="c4"> <img class="eq" src="eqs/1673000118047957221-130.png" alt="cdots" style="vertical-align: --3px" /> </td><td class="c5"> <img class="eq" src="eqs/9984030031-130.png" alt="N" style="vertical-align: -0px" /> </td></tr>
-<tr class="r2"><td class="c1"><img class="eq" src="eqs/1495230934591648943-130.png" alt="t=1" style="vertical-align: -1px" /> </td><td class="c2"> <img class="eq" src="eqs/5760034605052020-130.png" alt="-1" style="vertical-align: -0px" /> </td><td class="c3"> <img class="eq" src="eqs/6272018864-130.png" alt="1" style="vertical-align: -0px" /> </td><td class="c4"> <img class="eq" src="eqs/1673000118047957221-130.png" alt="cdots" style="vertical-align: --3px" /> </td><td class="c5"> <img class="eq" src="eqs/5760034605052020-130.png" alt="-1" style="vertical-align: -0px" /> </td></tr>
-<tr class="r3"><td class="c1"><img class="eq" src="eqs/1495230934591648942-130.png" alt="t=2" style="vertical-align: -1px" /> </td><td class="c2"> <img class="eq" src="eqs/6272018864-130.png" alt="1" style="vertical-align: -0px" /> </td><td class="c3"> <img class="eq" src="eqs/6272018864-130.png" alt="1" style="vertical-align: -0px" /> </td><td class="c4"> <img class="eq" src="eqs/1673000118047957221-130.png" alt="cdots" style="vertical-align: --3px" /> </td><td class="c5"> <img class="eq" src="eqs/5760034605052020-130.png" alt="-1" style="vertical-align: -0px" />
-</td></tr></table>
+
+<table border="1" class="wikitable">
+<caption>Modularity Optimization Comparison<sup id="cite_ref-10" class="reference"><a href="#cite_note-10">&#91;10&#93;</a></sup>
+</caption>
+<tbody>
+<tr>
+<th>
+</th>
+<th>Karate
+</th>
+<th>Arxiv
+</th>
+<th>Internet
+</th>
+<th>Web nd.edu
+</th>
+<th>Phone
+</th>
+<th>Web uk-2005
+</th>
+<th>Web WebBase 2001
+</th>
+</tr>
+<tr>
+<th>Nodes/links
+</th>
+<td>34/77</td>
+<td>9k/24k</td>
+<td>70k/351k</td>
+<td>325k/1M</td>
+<td>2.6M/6.3M</td>
+<td>39M/783M</td>
+<td>118M/1B
+</td>
+</tr>
+<tr>
+<th>Clauset, Newman, and Moore
+</th>
+<td>.38/0s</td>
+<td>.772/3.6s</td>
+<td>.692/799s</td>
+<td>.927/5034s</td>
+<td>-/-</td>
+<td>-/-</td>
+<td>-/-
+</td>
+</tr>
+<tr>
+<th>Pons and Latapy
+</th>
+<td>.42/0s</td>
+<td>.757/3.3s</td>
+<td>.729/575s</td>
+<td>.895/6666s</td>
+<td>-/-</td>
+<td>-/-</td>
+<td>-/-
+</td>
+</tr>
+<tr>
+<th>Wakita and Tsurumi
+</th>
+<td>.42/0s</td>
+<td>.761/0.7s</td>
+<td>.667/62s</td>
+<td>.898/248s</td>
+<td>.56/464s</td>
+<td>-/-</td>
+<td>-/-
+</td>
+</tr>
+<tr>
+<th>Louvain Method
+</th>
+<td>.42/0s</td>
+<td>.813/0s</td>
+<td>.781/1s</td>
+<td>.935/3s</td>
+<td>.769/134s</td>
+<td>.979/738s</td>
+<td>.984/152mn
+</td>
+</tr>
+</tbody>
+</table>
+	
 <p>Since the don't have complete information of the losses of each expert a prior, minimizing total loss makes little sense. Instead, we will try devising an algorithm where we perform as good as the best expert.</p>
+
 <h2>Greedy Algorithm</h2>
 <p>We will now prove that Greedy Algorithm can perform arbitrarily worse. Consider the following example:</p>
 <table id="greedy">
